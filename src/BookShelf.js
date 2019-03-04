@@ -1,6 +1,7 @@
 import React from "react"
 import Book from "./Book"
 import './App.css'
+import BooksApp from "./App";
 
 class BookShelf extends React.Component {
     constructor() {
@@ -10,7 +11,12 @@ class BookShelf extends React.Component {
     render() {
         return(
             <ol className="books-grid">
-                <Book />          
+                {this.props.books.map(book => (
+                    <Book book={book}
+                          books={this.props.books}
+                          key={book.id}
+                    />
+                ))}        
             </ol>
         )
     }
