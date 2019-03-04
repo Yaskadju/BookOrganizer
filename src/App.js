@@ -11,6 +11,8 @@ class BooksApp extends React.Component {
       showSearchPage: false,
       books: []
     }
+
+    this.changeShelf = this.changeShelf.bind(this)
   }
 
   componentDidMount() {
@@ -19,8 +21,22 @@ class BooksApp extends React.Component {
     })
   }
 
-  
-  
+  changeShelf(changedBook, shelf) {
+    BooksAPI.update(changedBook, shelf).then(response => {
+      // set shelf for new or updated book
+      changedBook.shelf = shelf
+      // update state with changed book
+      this.setState(prevState => ({
+        books: prevState.books
+        // remove updated book from array
+        .filter(book => book.id !== changedBook.id)
+        // add updated book to array
+        .concat(changedBook)
+      }))
+    })
+  }
+
+
   render() {
     return (
       <div className="app">
@@ -44,20 +60,11 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
 
-            
-            
-              <div>
-
-                
-                    <BookList books={this.state.books} />
-                  
-
+              <div>      
+                    <BookList books={this.state.books}
+                              changeShelf={this.changeShelf} />
               </div>
             
-
-
-
-
             <div className="open-search">
               <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
             </div>

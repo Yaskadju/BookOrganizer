@@ -26,7 +26,8 @@ class BookList extends React.Component {
                 <div className="bookshelf" key={index}>
                     <h2 className="bookshelf-title">{shelf.title}</h2>
                     <div className="bookshelf-books">
-                        <BookShelf books={shelfBooks}/>
+                        <BookShelf books={shelfBooks}
+                                   changeShelf={this.props.changeShelf }/>
                     </div>
                 </div>
                     )
