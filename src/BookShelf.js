@@ -3,25 +3,19 @@ import Book from "./Book";
 import "./App.css";
 import BooksApp from "./App";
 
-class BookShelf extends React.Component {
-  constructor() {
-    super();
-  }
-
-  render() {
-    return (
-      <ol className="books-grid">
-        {this.props.books.map(book => (
-          <Book
-            book={book}
-            books={this.props.books}
-            key={book.id}
-            changeShelf={this.props.changeShelf}
-          />
-        ))}
-      </ol>
-    );
-  }
+function BookShelf(props) {
+  return (
+    <ol className="books-grid">
+      {props.books.map(book => (
+        <Book
+          book={book}
+          books={props.books}
+          key={book.id}
+          changeShelf={props.changeShelf}
+        />
+      ))}
+    </ol>
+  );
 }
 
 export default BookShelf;
